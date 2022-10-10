@@ -11,7 +11,8 @@ export const GlobalStorage = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   //fetch all location data and render on home
-  useEffect(async () => {
+  useEffect( () => {
+    async function fetchAllData(){
     const theme = localStorage.getItem("theme");
     if (theme === "true") {
       setDarkTheme(true);
@@ -22,10 +23,13 @@ export const GlobalStorage = ({ children }) => {
     const json = await response.json();
     setData(json);
     setLoading(false);
+}
+fetchAllData();
   }, []);
 
   //create a new render applying the region filter
-  useEffect(async () => {
+  useEffect( () => {
+    async function fetchFilterData(){
     setLoading(true);
     if (region !== "all") {
       setOpenFilter(false);
@@ -40,10 +44,13 @@ export const GlobalStorage = ({ children }) => {
       setData(json);
       setLoading(false);
     }
+}
+fetchFilterData();
   }, [region]);
 
   //create a new render applying the user search
-  useEffect(async () => {
+  useEffect( () => {
+    async function fetchSearchData(){
     if (search && search.length >= 3) {
       setLoading(true);
       const response = await fetch(`https://restcountries.com/v2/name/${search}`);
@@ -57,6 +64,8 @@ export const GlobalStorage = ({ children }) => {
       setData(json);
       setLoading(false);
     }
+}
+fetchSearchData();
   }, [search]);
 
   //apply theme config

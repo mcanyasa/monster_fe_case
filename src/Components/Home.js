@@ -6,7 +6,7 @@ import Input from './Input/index';
 import Filter from './Filter/index';
 import Item from './Item/index';
 
-function Home(){
+const Home = () => {
   const { data, darkTheme, loading } = useContext(GlobalContext);
 
   return (
@@ -22,8 +22,8 @@ function Home(){
             <div className={styles.loader}></div>
           ) : (
             <div className={styles.items}>
-              {data.map(item => {
-                return <Item key={item.name} name={item.name} alpha={item.alpha2Code} population={item.population} region={item.region} capital={item.capital} flag={item.flags.svg} />
+              {data.map((item,index) => {
+                return <Item key={index} name={item.name} alpha={item.alpha2Code} population={item.population} region={item.region} capital={item.capital} flag={item.flags.svg} />
               })}
             </div>
           )}

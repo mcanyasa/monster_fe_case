@@ -1,12 +1,20 @@
 import React from 'react';
 import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { GlobalStorage } from './Contexts/GlobalContext';
 import Home from './Components/Home';
+import Details from './Components/Details/index';
 
 function App() {
   return (
-    <div className="App">
-      <Home /> 
-    </div>
+    <BrowserRouter>
+      <GlobalStorage>
+        <Routes>
+          <Route path="/*" element={<Home />} />
+          <Route path="/:name" element={<Details />} />
+        </Routes>
+      </GlobalStorage>
+    </BrowserRouter>
   );
 }
 
